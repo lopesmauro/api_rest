@@ -11,9 +11,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: database_api_rest
       MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: root
     volumes:
       - mysql_data:/var/lib/mysql
 
 volumes:
-  mysql_data: {}   
+  mysql_data: {}
