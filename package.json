@@ -7,7 +7,7 @@
     "start": "tsx watch ./src/index.ts",
     "db:migrate": "tsx node_modules/.bin/sequelize db:migrate"
   },
-  "type": "commonjs",
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
