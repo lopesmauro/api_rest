@@ -1,12 +1,13 @@
 import 'dotenv/config'
+import { Options } from 'sequelize'
 
-const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME, } = process.env
+const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env
 const port = parseInt(DB_PORT || "3306", 10);
 
-const config = {
+const config:Options = {
   dialect: 'mysql',
   host: DB_HOST,
-  port: port,
+  port,
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
@@ -16,4 +17,4 @@ const config = {
   },
 }
 
-export default config
+export = config

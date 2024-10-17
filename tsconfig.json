@@ -1,20 +1,18 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "module": "Node16",
-    "lib": ["ES2023"],
+    "module": "CommonJS",
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
   },
   "include": [
-    "src/**/*.ts"
-, "src/config/database.js"  ],
+    "src/**/*.ts",
+  ],
   "exclude": [
     "node_modules"
   ]
