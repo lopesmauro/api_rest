@@ -1,17 +1,14 @@
-import { Model, DataTypes } from 'sequelize'
+import { Model, DataTypes, Sequelize } from 'sequelize'
 import connection from '../database/sync.ts'
 
-class Aluno extends Model {
+class User extends Model {
   declare id: number
   declare nome: string
   declare sobrenome: string
   declare email: string
-  declare idade: number
-  declare peso: number
-  declare altura: number
 }
 
-Aluno.init({
+User.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -26,23 +23,16 @@ Aluno.init({
     allowNull: false,
     unique: true,
   },
-  idade: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  peso: {
-    type: DataTypes.FLOAT,
-    allowNull: false,
-  },
-  altura: {
-    type: DataTypes.FLOAT,
+  password_hash: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
   sequelize: connection,
-  modelName: 'Aluno',
-  tableName: 'alunos',
+  modelName: 'User',
+  tableName: 'users',
+  underscored: true,
   timestamps: true,
 })
 
-export default Aluno
+export default User
