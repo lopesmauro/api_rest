@@ -1,8 +1,6 @@
 import express from 'express'
-import dotenv from "dotenv"
 import cors from 'cors'
-dotenv.config()
-import homeRoutes from "./routes/homeRoutes.ts"
+import homeRoutes from "./routes/homeRoutes"
 
 const app = express()
 

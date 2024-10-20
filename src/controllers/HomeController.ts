@@ -4,10 +4,9 @@ import User from "../models/User"
 const homeController= async (req:Request, res:Response):Promise<void> => {
   const newUser = await User.create({
     name: "mf",
-    email: "mflopes@gmail.com",
+    email: "newUser@gmail.com",
     password_hash: "123"
   })
-
   res.status(200).json({
     newUser
   })

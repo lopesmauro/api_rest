@@ -1,38 +1,24 @@
-import { Model, DataTypes, Sequelize } from 'sequelize'
-import connection from '../database/sync.ts'
+import { Sequelize, Model } from 'sequelize'
+import connection from '../database/sync'
 
-class User extends Model {
-  declare id: number
-  declare nome: string
-  declare sobrenome: string
-  declare email: string
-}
-
-User.init({
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
+const User = connection.define('User', {
   name: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
     unique: true,
   },
   password_hash: {
-    type: DataTypes.STRING,
+    type: Sequelize.STRING,
     allowNull: false,
   },
 }, {
-  sequelize: connection,
-  modelName: 'User',
-  tableName: 'users',
-  underscored: true,
-  timestamps: true,
+    tableName: 'users',
+    underscored: true,
+    timestamps: true,
 })
 
 export default User
