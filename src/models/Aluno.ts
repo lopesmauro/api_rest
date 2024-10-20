@@ -1,12 +1,7 @@
-import { Model, Sequelize } from 'sequelize'
+import { Sequelize } from 'sequelize'
 import connection from '../database/sync'
 
 const Aluno = connection.define('Aluno', {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
   name: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -33,5 +28,5 @@ const Aluno = connection.define('Aluno', {
   timestamps: true,
 })
 
-
+// Aluno.sync() Create the table if doesn't exist
 export default Aluno

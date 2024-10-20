@@ -1,6 +1,6 @@
 import { Sequelize, Options } from 'sequelize'
-import dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
+
 const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env
 const port = parseInt(DB_PORT || "3306", 10)
 
