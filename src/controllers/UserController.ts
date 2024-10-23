@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import User from "../models/User"
+import { ValidationError } from 'sequelize'
 
 const indexUser = async (req: Request, res: Response) => {
 
@@ -17,8 +18,10 @@ const storeUser = async (req:Request, res:Response):Promise<void> => {
     res.status(200).json({
       newUser
     })
-  } catch (e) {
-    res.status(400).json({ "message": "Não foi possível criar o usuário."})
+  } catch (e: any) {
+    if(e.errors){
+      res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
+    }
   }
 }
 
