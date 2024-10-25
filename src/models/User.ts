@@ -1,11 +1,11 @@
-import sequelize, { Sequelize, Model } from 'sequelize'
+import sequelize from 'sequelize'
 import bcryptjs from 'bcryptjs'
-import connection from '../database/sync'
+import connection from '../database/sync.ts'
 
 
 const User = connection.define('User', {
   name: {
-    type: Sequelize.STRING,
+    type: sequelize.STRING,
     allowNull: false,
     defaultValue: '',
     validate: {
@@ -16,7 +16,7 @@ const User = connection.define('User', {
     }
   },
   email: {
-    type: Sequelize.STRING,
+    type: sequelize.STRING,
     allowNull: false,
     defaultValue: '',
     unique: {
@@ -30,7 +30,7 @@ const User = connection.define('User', {
     }
   },
   password_hash: {
-    type: Sequelize.STRING,
+    type: sequelize.STRING,
     defaultValue: '',
     allowNull: false,
   },

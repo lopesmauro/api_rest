@@ -1,26 +1,26 @@
-import { Sequelize } from 'sequelize'
-import connection from '../database/sync'
+import sequelize from 'sequelize'
+import connection from '../database/sync.ts'
 
 const Aluno = connection.define('Aluno', {
   name: {
-    type: Sequelize.STRING,
+    type: sequelize.STRING,
     allowNull: false,
   },
   email: {
-    type: Sequelize.STRING,
+    type: sequelize.STRING,
     allowNull: false,
     unique: true,
   },
   idade: {
-    type: Sequelize.INTEGER,
+    type: sequelize.INTEGER,
     allowNull: false,
   },
   peso: {
-    type: Sequelize.FLOAT,
+    type: sequelize.FLOAT,
     allowNull: false,
   },
   altura: {
-    type: Sequelize.FLOAT,
+    type: sequelize.FLOAT,
     allowNull: false,
   },
 }, {
