@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
 
-export const indexUser = async (req: Request, res: Response):Promise<any> => {
+const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const users = await User.findAll()
     return res.status(200).json(users)
@@ -10,7 +10,7 @@ export const indexUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-export const storeUser = async (req: Request, res: Response):Promise<any> => {
+const storeUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const { name, email, password } = req.body
 
@@ -18,7 +18,6 @@ export const storeUser = async (req: Request, res: Response):Promise<any> => {
       name,
       email,
       password,
-      password_hash: ''
     })
     return res.status(200).json({ newUser })
   } catch (e: any) {
@@ -29,11 +28,11 @@ export const storeUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-export const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response) => {
 
 }
 
-export const showUser = async (req: Request, res: Response) => {
+const showUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const { id } =  req.params
     const user = await User.findByPk(id)
@@ -43,8 +42,15 @@ export const showUser = async (req: Request, res: Response) => {
   }
 }
 
-export const updateUser  = async (req: Request, res: Response) => {
+const updateUser  = async (req: Request, res: Response) => {
 
 }
 
 
+export {
+  indexUser,
+  storeUser,
+  deleteUser,
+  showUser,
+  updateUser,
+}
