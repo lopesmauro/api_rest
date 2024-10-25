@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "moduleResolution":"Node",
     "allowImportingTsExtensions": true,
-    "noEmit": false,
+    "emitDeclarationOnly": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,

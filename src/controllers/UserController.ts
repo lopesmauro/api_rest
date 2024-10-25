@@ -1,51 +1,50 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
-import { ValidationError } from 'sequelize'
 
-const indexUser = async (req: Request, res: Response) => {
+export const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const users = await User.findAll()
-    res.status(200).json(users)
+    return res.status(200).json(users)
   } catch (e: any) {
-    res.status(500).json({ message: "nao foi possivel realizar esta operação."})
+    return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
   }
 }
 
-const storeUser = async (req:Request, res:Response):Promise<void> => {
-  const { name, email, password } = req.body
+export const storeUser = async (req: Request, res: Response):Promise<any> => {
   try {
+    const { name, email, password } = req.body
+
     const newUser = await User.create({
       name,
       email,
       password,
       password_hash: ''
     })
-    res.status(200).json({
-      newUser
-    })
+    return res.status(200).json({ newUser })
   } catch (e: any) {
     if(e.errors){
-      res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
+      return res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
     }
+    return res.status(500).json({ message: "Erro ao criar usuário." });
   }
 }
 
-const deleteUser = async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
 
 }
 
-const showUsers = async (req: Request, res: Response) => {
+export const showUser = async (req: Request, res: Response) => {
+  try {
+    const { id } =  req.params
+    const user = await User.findByPk(id)
+    return res.status(200).json(user)
+  } catch (e: any) {
+    return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
+  }
+}
+
+export const updateUser  = async (req: Request, res: Response) => {
 
 }
 
-const updateUser  = async (req: Request, res: Response) => {
 
-}
-
-export {
-  indexUser,
-  showUsers,
-  storeUser,
-  deleteUser,
-  updateUser,
-}
