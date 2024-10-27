@@ -42,10 +42,26 @@ const showUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-const updateUser  = async (req: Request, res: Response) => {
-
+const updateUser  = async (req: Request, res: Response):Promise<any>  => {
+  try {
+    if(!req.params.id){
+      return res.status(400).json({
+        errors: ['ID não enviado.']
+      })
+    }
+    const { id } =  req.params
+    const user = await User.findByPk(id)
+    if(!user){
+      return res.status(400).json({
+        errors: ['Usuário não existe.']
+      })
+    }
+    await user.update(req.body)
+    return res.status(200).json(user)
+  } catch (e: any) {
+    return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
+  }
 }
-
 
 export {
   indexUser,
