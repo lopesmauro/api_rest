@@ -51,7 +51,9 @@ const User = connection.define('User', {
 })
 
 User.addHook('beforeSave', async (user: any) => {
-  user.password_hash = await bcryptjs.hash(user.password, 8)
+  if(user.password){
+    user.password_hash = await bcryptjs.hash(user.password, 8)
+  }
 })
 
 export default User
