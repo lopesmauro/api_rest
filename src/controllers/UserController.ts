@@ -29,7 +29,26 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
 }
 
 const deleteUser = async (req: Request, res: Response) => {
-
+  try {
+    if(!req.params.id){
+      return res.status(400).json({
+        errors: ['ID não enviado.']
+      })
+    }
+    const { id } =  req.params
+    const user = await User.findByPk(id)
+    if(!user){
+      return res.status(400).json({
+        errors: ['Usuário não existe.']
+      })
+    }
+    await user.destroy(req.body)
+    return res.status(200).json({
+      message: "Usuário deletado com sucesso."
+    })
+  } catch (e: any) {
+    return res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
+  }
 }
 
 const showUser = async (req: Request, res: Response):Promise<any> => {
@@ -59,7 +78,7 @@ const updateUser  = async (req: Request, res: Response):Promise<any>  => {
     await user.update(req.body)
     return res.status(200).json(user)
   } catch (e: any) {
-    return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
+    return res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
   }
 }
 
