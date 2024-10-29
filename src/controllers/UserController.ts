@@ -28,7 +28,7 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-const deleteUser = async (req: Request, res: Response) => {
+const deleteUser = async (req: Request, res: Response):Promise<any>  => {
   try {
     if(!req.params.id){
       return res.status(400).json({

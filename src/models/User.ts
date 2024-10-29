@@ -56,4 +56,8 @@ User.addHook('beforeSave', async (user: any) => {
   }
 })
 
+export const passwordIsValid = (password: string, user: any): Promise<any> => {
+  return bcryptjs.compare(password, user.password)
+}
+
 export default User

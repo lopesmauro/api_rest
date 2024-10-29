@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
-import userRoutes from "./routes/userRoutes.ts"
+import userRoutes from './routes/userRoutes.ts'
+import tokenRoutes from './routes/tokenRoutes.ts'
 
 const app = express()
 
@@ -9,6 +10,8 @@ app.use(express.json())
 app.use(cors())
 
 app.use("/user", userRoutes)
+app.use("/tokens", tokenRoutes)
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000')
