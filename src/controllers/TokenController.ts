@@ -38,7 +38,7 @@ const storeToken = async (req: Request, res: Response):Promise<any>  => {
     expiresIn: TOKEN_EXPIRATION
   })
 
-  return res.status(200).json(token)
+  return res.status(200).json({token})
 }
 
 export default storeToken
