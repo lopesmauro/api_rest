@@ -1,7 +1,7 @@
-import { Request, Response } from "express"
-import User, { passwordIsValid } from "../models/User"
 import 'dotenv/config'
+import { Request, Response } from "express"
 import jwt from "jsonwebtoken"
+import User, { passwordIsValid } from "../models/User"
 import { IUser } from "../types/Iuser"
 
 const {TOKEN_SECRET, TOKEN_EXPIRATION} = process.env
