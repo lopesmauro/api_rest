@@ -32,15 +32,15 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-const deleteUser = async (req: Request, res: Response):Promise<any>  => {
+const deleteUser = async (req: RequestUserData, res: Response):Promise<any>  => {
   try {
-    if(!req.params.id){
+    if(req.userId){
       return res.status(400).json({
         errors: ['ID não enviado.']
       })
     }
-    const { id } =  req.params
-    const user = await User.findByPk(id)
+    const { userId } =  req
+    const user = await User.findByPk(userId)
     if(!user){
       return res.status(400).json({
         errors: ['Usuário não existe.']
@@ -55,9 +55,9 @@ const deleteUser = async (req: Request, res: Response):Promise<any>  => {
   }
 }
 
-const showUser = async (req: Request, res: Response):Promise<any> => {
+const showUser = async (req: RequestUserData, res: Response):Promise<any> => {
   try {
-    const user = await User.findByPk(req.params.id) as IUser | null
+    const user = await User.findByPk(req.userId) as IUser | null
     if(!user) {
       return res.status(400).json({
         errors: ['Usuário não encontrado.']
