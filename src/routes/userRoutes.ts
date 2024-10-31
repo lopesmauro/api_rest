@@ -5,8 +5,8 @@ import { indexUser, showUser, storeUser, deleteUser, updateUser } from "../contr
 const route = Router()
 
 route.get("/", loginRequired, indexUser)
-route.get("/:", loginRequired, showUser)
-route.post("/", loginRequired, storeUser)
+route.get("/", loginRequired, showUser)
+route.post("/", storeUser)
 route.delete("/", loginRequired, deleteUser)
 route.put("/", loginRequired, updateUser)
 

@@ -1,9 +1,12 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
+import { IUser } from "../types/Iuser.ts"
 
 const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
-    const users = await User.findAll()
+    const users = await User.findAll({ 
+      attributes: ['id', 'nome', 'email'] 
+    })
     return res.status(200).json(users)
   } catch (e: any) {
     return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
@@ -53,9 +56,18 @@ const deleteUser = async (req: Request, res: Response):Promise<any>  => {
 
 const showUser = async (req: Request, res: Response):Promise<any> => {
   try {
-    const { id } =  req.params
-    const user = await User.findByPk(id)
-    return res.status(200).json(user)
+    const user = await User.findByPk(req.params.id) as IUser | null
+    if(!user) {
+      return res.status(400).json({
+        errors: ['Usuário não encontrado.']
+      })
+    }
+    const { id, name, email } = user
+    return res.status(200).json({
+      id,
+      name,
+      email,
+    })
   } catch (e: any) {
     return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
   }
