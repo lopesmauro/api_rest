@@ -16,14 +16,25 @@ const indexUser = async (req: Request, res: Response):Promise<any> => {
 
 const storeUser = async (req: Request, res: Response):Promise<any> => {
   try {
-    const { name, email, password } = req.body
-
+    const { name, email, password } = req.body 
     const newUser = await User.create({
       name,
       email,
       password,
     })
-    return res.status(200).json({ newUser })
+
+    if(!newUser){
+      return res.status(400).json({
+        errors: ['Não foi possível criar esse usuário.']
+      })
+    }
+    
+    return res.status(200).json({ 
+      id: newUser.get().id,
+      name: newUser.get().name,
+      email: newUser.get().email,
+     })
+
   } catch (e: any) {
     if(e.errors){
       return res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
