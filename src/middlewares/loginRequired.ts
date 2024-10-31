@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express"
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { RequestUserData } from "../types/RequestUserData"
+import User from "../models/User"
 
 
-const loginRequired = (req: RequestUserData, res: Response, next:NextFunction):void => {
+const loginRequired = async (req: RequestUserData, res: Response, next:NextFunction):Promise<void> => {
 
   const { TOKEN_SECRET } = process.env
   if (!TOKEN_SECRET) {
@@ -25,12 +26,25 @@ const loginRequired = (req: RequestUserData, res: Response, next:NextFunction):v
     })
     return
   }
-  
+
   const [text, token] = authorization.split(' ')
 
   try {
     const data = jwt.verify(token, TOKEN_SECRET) as JwtPayload
     const { id, email } = data
+    const user =  await User.findOne({
+      where: {
+        id,
+        email,
+      }
+    })
+    if(!user){
+      res.status(401).json({
+        errors: ['Token invalid.']
+      })
+      return 
+    }
+
     req.userId = id
     req.userEmail = email
     return next()
