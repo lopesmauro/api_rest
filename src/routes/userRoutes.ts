@@ -5,9 +5,9 @@ import { indexUser, showUser, storeUser, deleteUser, updateUser } from "../contr
 const route = Router()
 
 route.get("/", loginRequired, indexUser)
-route.get("/:id", loginRequired, showUser)
+route.get("/:", loginRequired, showUser)
 route.post("/", loginRequired, storeUser)
-route.delete("/:id", loginRequired, deleteUser)
-route.put("/:id", loginRequired, updateUser)
+route.delete("/", loginRequired, deleteUser)
+route.put("/", loginRequired, updateUser)
 
 export default route
