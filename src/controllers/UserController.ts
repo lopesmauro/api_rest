@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
 import { IUser } from "../types/Iuser.ts"
+import { RequestUserData } from "../types/RequestUserData.ts"
 
 const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
@@ -73,15 +74,15 @@ const showUser = async (req: Request, res: Response):Promise<any> => {
   }
 }
 
-const updateUser  = async (req: Request, res: Response):Promise<any>  => {
+const updateUser  = async (req: RequestUserData, res: Response):Promise<any>  => {
   try {
-    if(!req.params.id){
+    if(!req.userId){
       return res.status(400).json({
         errors: ['ID não enviado.']
       })
     }
-    const { id } =  req.params
-    const user = await User.findByPk(id)
+    const { userId } =  req
+    const user = await User.findByPk(userId)
     if(!user){
       return res.status(400).json({
         errors: ['Usuário não existe.']
