@@ -1,6 +1,5 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
-import { IUser } from "../types/Iuser.ts"
 import { RequestUserData } from "../types/RequestUserData.ts"
 
 const indexUser = async (req: Request, res: Response):Promise<any> => {
@@ -24,15 +23,16 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
     })
 
     if(!newUser){
-      return res.status(400).json({
+      res.status(400).json({
         errors: ['Não foi possível criar esse usuário.']
       })
+      return
     }
     
     return res.status(200).json({ 
-      id: newUser.get().id,
-      name: newUser.get().name,
-      email: newUser.get().email,
+      id: newUser.get("id"),
+      name: newUser.get("name"),
+      email: newUser.get("email"),
      })
 
   } catch (e: any) {
@@ -68,17 +68,16 @@ const deleteUser = async (req: RequestUserData, res: Response):Promise<any>  => 
 
 const showUser = async (req: RequestUserData, res: Response):Promise<any> => {
   try {
-    const user = await User.findByPk(req.userId) as IUser | null
+    const user = await User.findByPk(req.userId)
     if(!user) {
       return res.status(400).json({
         errors: ['Usuário não encontrado.']
       })
     }
-    const { id, name, email } = user
     return res.status(200).json({
-      id,
-      name,
-      email,
+      id: user.get("id"),
+      name: user.get("name"),
+      email: user.get("email"),
     })
   } catch (e: any) {
     return res.status(500).json({ message: "nao foi possivel realizar esta operação."})

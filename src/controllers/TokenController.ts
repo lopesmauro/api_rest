@@ -2,7 +2,6 @@ import 'dotenv/config'
 import { Request, Response } from "express"
 import jwt from "jsonwebtoken"
 import User, { passwordIsValid } from "../models/User"
-import { IUser } from "../types/Iuser"
 
 const {TOKEN_SECRET, TOKEN_EXPIRATION} = process.env
 
@@ -14,7 +13,7 @@ const storeToken = async (req: Request, res: Response):Promise<any>  => {
     })
   }
 
-  const user = await User.findOne({ where: { email: email }}) as IUser | null
+  const user = await User.findOne({ where: { email }})
   if(!user) {
     return res.status(401).json({
       errors:  ['Usuário não existe.']
@@ -33,7 +32,7 @@ const storeToken = async (req: Request, res: Response):Promise<any>  => {
     })
   }
 
-  const { id } = user 
+  const id  = user.get("id") 
   const token = jwt.sign({ id, email }, TOKEN_SECRET, {
     expiresIn: TOKEN_EXPIRATION
   })
