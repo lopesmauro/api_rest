@@ -1,11 +1,13 @@
 import { Request, Response } from "express"
 import User from "../models/User.ts"
 import { RequestUserData } from "../types/RequestUserData.ts"
+import { createClient } from 'redis'
+const client = createClient()
 
 const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
-    const users = await User.findAll({ 
-      attributes: ['id', 'nome', 'email'] 
+    const users = await User.findAll({
+      attributes: ['id', 'nome', 'email']
     })
     return res.status(200).json(users)
   } catch (e: any) {
@@ -15,7 +17,7 @@ const indexUser = async (req: Request, res: Response):Promise<any> => {
 
 const storeUser = async (req: Request, res: Response):Promise<any> => {
   try {
-    const { name, email, password } = req.body 
+    const { name, email, password } = req.body
     const newUser = await User.create({
       name,
       email,
@@ -28,8 +30,8 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
       })
       return
     }
-    
-    return res.status(200).json({ 
+
+    return res.status(200).json({
       id: newUser.get("id"),
       name: newUser.get("name"),
       email: newUser.get("email"),
@@ -68,16 +70,27 @@ const deleteUser = async (req: RequestUserData, res: Response):Promise<any>  => 
 
 const showUser = async (req: RequestUserData, res: Response):Promise<any> => {
   try {
+    const userFromCache = await client.get(`user:${req.userId}`)
+    if (userFromCache) {
+      return res.send(JSON.parse(userFromCache))
+    }
+
     const user = await User.findByPk(req.userId)
     if(!user) {
       return res.status(400).json({
         errors: ['Usuário não encontrado.']
       })
     }
-    return res.status(200).json({
+    const userData = {
       id: user.get("id"),
       name: user.get("name"),
       email: user.get("email"),
+    }
+    await client.set(`user:${req.userId}`, JSON.stringify(userData), {
+      EX: 10,
+    })
+    return res.status(200).json({
+      userData
     })
   } catch (e: any) {
     return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
