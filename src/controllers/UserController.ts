@@ -3,6 +3,7 @@ import User from "../models/User.ts"
 import { RequestUserData } from "../types/RequestUserData.ts"
 import { createClient } from 'redis'
 const client = createClient()
+client.connect()
 
 const indexUser = async (req: Request, res: Response):Promise<any> => {
   try {
@@ -74,7 +75,6 @@ const showUser = async (req: RequestUserData, res: Response):Promise<any> => {
     if (userFromCache) {
       return res.send(JSON.parse(userFromCache))
     }
-
     const user = await User.findByPk(req.userId)
     if(!user) {
       return res.status(400).json({
