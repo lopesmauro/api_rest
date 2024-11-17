@@ -5,17 +5,6 @@ import { createClient } from 'redis'
 const client = createClient()
 client.connect()
 
-const indexUser = async (req: Request, res: Response):Promise<any> => {
-  try {
-    const users = await User.findAll({
-      attributes: ['id', 'nome', 'email']
-    })
-    return res.status(200).json(users)
-  } catch (e: any) {
-    return res.status(500).json({ message: "nao foi possivel realizar esta operação."})
-  }
-}
-
 const storeUser = async (req: Request, res: Response):Promise<any> => {
   try {
     const { name, email, password } = req.body
@@ -119,7 +108,6 @@ const updateUser  = async (req: RequestUserData, res: Response):Promise<any>  =>
 }
 
 export {
-  indexUser,
   storeUser,
   deleteUser,
   showUser,
