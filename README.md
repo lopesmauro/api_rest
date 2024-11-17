@@ -77,4 +77,8 @@ docker-compose up -d
 ```bash
 sudo docker exec -it container_bd_api mysql -u user -p
 ```
+### Passo 6: Rodar o conteiner do Redis
 
+```bash
+docker run --name cache-api-rest -p 6379:6379 -d redis
+```
