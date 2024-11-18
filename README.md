@@ -3,31 +3,38 @@
 
 ## Estrutura do Projeto7
 
-/api_rest
-│
-├── /src/
-│   ├── /config/
-│   ├── /controllers/
-│   ├── /database/
-│   ├── /middlewares/
-│   ├── /models/
-│   ├── /routes/
-│   ├── /services/
-│   ├── /types/
-│   └── index.ts
-│
-├── /node_modules/
-├── .editorconfig
-├── .env
-├── .gitignore
-├── .sequelizerc
-├── docker-compose.yml
-├── eslint.config.mjs
-├── package-lock.json
-├── package.json
-├── README.md
-└── tsconfig.json
+```bash
 
+.
+
+├── public
+│   └── index.html
+│
+├── src >> source code
+│   ├── assets
+│   ├── components
+│   ├── hooks
+│   ├── services
+│   │   └── api.js
+│   │
+│   ├── styles
+│   │   └── globalStyles.js
+│   │   └── theme.js
+│   │
+│   ├── utils
+│   ├── App.js
+│   ├── index.js
+│   └── routes.js
+│
+│
+├── .editorconfig
+├── .eslintrc.js
+├── .gitignore.js
+├── .prettierrc.js
+├── README.md
+└── package.json
+
+```
 
 ## Pré-requisitos
 
