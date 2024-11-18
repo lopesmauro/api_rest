@@ -5,34 +5,30 @@
 
 ```bash
 
-.
-
-├── public
-│   └── index.html
+/api_rest
 │
-├── src >> source code
-│   ├── assets
-│   ├── components
-│   ├── hooks
-│   ├── services
-│   │   └── api.js
-│   │
-│   ├── styles
-│   │   └── globalStyles.js
-│   │   └── theme.js
-│   │
-│   ├── utils
-│   ├── App.js
-│   ├── index.js
-│   └── routes.js
+├── /src/
+│   ├── /config/
+│   ├── /controllers/
+│   ├── /database/
+│   ├── /middlewares/
+│   ├── /models/
+│   ├── /routes/
+│   ├── /services/
+│   ├── /types/
+│   └── index.ts
 │
-│
+├── /node_modules/
 ├── .editorconfig
-├── .eslintrc.js
-├── .gitignore.js
-├── .prettierrc.js
+├── .env
+├── .gitignore
+├── .sequelizerc
+├── docker-compose.yml
+├── eslint.config.mjs
+├── package-lock.json
+├── package.json
 ├── README.md
-└── package.json
+└── tsconfig.json
 
 ```
 
