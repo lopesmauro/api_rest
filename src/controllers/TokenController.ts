@@ -32,7 +32,7 @@ const storeToken = async (req: Request, res: Response):Promise<any>  => {
     })
   }
 
-  const id  = user.get("id") 
+  const id  = user.get("id")
   const token = jwt.sign({ id, email }, TOKEN_SECRET, {
     expiresIn: TOKEN_EXPIRATION
   })

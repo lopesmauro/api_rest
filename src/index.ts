@@ -13,6 +13,12 @@ app.use(express.json())
 app.use(cors())
 app.use(limiter)
 
+app.get('/', (req, res) => {
+  res.json({
+    isBeautiful: true,
+  }).status(200)
+})
+
 app.use("/user", userRoutes)
 app.use("/tokens", tokenRoutes)
 
