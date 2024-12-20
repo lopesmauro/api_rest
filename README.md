@@ -7,28 +7,28 @@
 
 /api_rest
 │
-├── /src/
-│   ├── /config/
-│   ├── /controllers/
-│   ├── /database/
-│   ├── /middlewares/
-│   ├── /models/
-│   ├── /routes/
-│   ├── /services/
-│   ├── /types/
-│   └── index.ts
+├── /src/                    # Código-fonte principal da aplicação
+│   ├── /config/             # Configurações globais do projeto, como variáveis de ambiente e inicialização
+│   ├── /controllers/        # Lógica das requisições HTTP (controladores para cada rota)
+│   ├── /database/           # Configuração do banco de dados e inicialização (ex.: conexão Sequelize ou Prisma)
+│   ├── /middlewares/        # Middlewares para tratamento de requisições, autenticação, validação, etc.
+│   ├── /models/             # Definições dos modelos de dados (ex.: Sequelize ou Mongoose)
+│   ├── /routes/             # Definição das rotas da aplicação e mapeamento para os controladores
+│   ├── /services/           # Lógica de negócio e interação entre controladores e modelos
+│   ├── /types/              # Definições de tipos e interfaces TypeScript
+│   └── index.ts             # Arquivo de entrada que inicializa o servidor
 │
-├── /node_modules/
-├── .editorconfig
-├── .env
-├── .gitignore
-├── .sequelizerc
-├── docker-compose.yml
-├── eslint.config.mjs
-├── package-lock.json
-├── package.json
-├── README.md
-└── tsconfig.json
+├── /node_modules/           # Dependências instaladas (gerenciado pelo npm ou yarn)
+├── .editorconfig            # Configuração para manter um padrão de editor de código
+├── .env                     # Arquivo de variáveis de ambiente (não deve ser versionado)
+├── .gitignore               # Arquivo que define arquivos/pastas ignorados pelo Git
+├── .sequelizerc             # Configuração personalizada do Sequelize CLI
+├── docker-compose.yml       # Configuração do Docker Compose para rodar a aplicação e serviços (ex.: banco de dados)
+├── eslint.config.mjs        # Configuração do ESLint para análise e padronização de código
+├── package-lock.json        # Detalhes das versões exatas das dependências
+├── package.json             # Configuração de scripts e dependências do projeto
+├── README.md                # Documentação do projeto
+└── tsconfig.json            # Configuração do TypeScript para o projeto
 
 ```
 
