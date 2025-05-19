@@ -9,7 +9,7 @@ const loginRequired = async (req: RequestUserData, res: Response, next:NextFunct
   const { TOKEN_SECRET } = process.env
   if (!TOKEN_SECRET) {
     res.status(500).json({
-      errors: ['Erro interno..']
+      errors: ['Erro interno...']
     })
     return
   }
@@ -42,7 +42,7 @@ const loginRequired = async (req: RequestUserData, res: Response, next:NextFunct
       res.status(401).json({
         errors: ['Token invalid.']
       })
-      return 
+      return
     }
 
     req.userId = id
@@ -55,4 +55,4 @@ const loginRequired = async (req: RequestUserData, res: Response, next:NextFunct
   }
 }
 
-export { loginRequired }  
+export { loginRequired }
