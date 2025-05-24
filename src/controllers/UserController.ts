@@ -37,7 +37,7 @@ const storeUser = async (req: Request, res: Response):Promise<any> => {
 
 const deleteUser = async (req: RequestUserData, res: Response):Promise<any>  => {
   try {
-    if(req.userId){
+    if(!req.userId){
       return res.status(400).json({
         errors: ['ID não enviado.']
       })
