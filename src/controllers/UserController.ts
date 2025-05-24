@@ -50,6 +50,7 @@ const deleteUser = async (req: RequestUserData, res: Response):Promise<any>  => 
       })
     }
     await user.destroy(req.body)
+    await client.del(`user:${userId}`)
     return res.status(200).json({
       message: "Usuário deletado com sucesso."
     })
@@ -101,6 +102,7 @@ const updateUser  = async (req: RequestUserData, res: Response):Promise<any>  =>
       })
     }
     await user.update(req.body)
+    await client.del(`user:${userId}`)
     return res.status(200).json(user)
   } catch (e: any) {
     return res.status(400).json({ errors: e.errors.map((err: any) => err.message)})
